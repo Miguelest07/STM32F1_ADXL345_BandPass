@@ -63,58 +63,58 @@ int main(void)
 
   while (1)
   {
-	  ReadADXL ();
-	  xx = PassBandFilter(xx, pxx);
-	  yy = PassBandFilter(yy, pyy);
-	  zz = PassBandFilter(zz, pzz);
+    ReadADXL ();
+    xx = PassBandFilter(xx, pxx);
+    yy = PassBandFilter(yy, pyy);
+    zz = PassBandFilter(zz, pzz);
 
-	  sprintf((char*)aa, "%03d,%03d,%03d\r\n", xx-pxx, yy-pyy, zz-pzz);
-	  HAL_UART_Transmit(&huart1, (unsigned char*)aa, 20, 20);
+    sprintf((char*)aa, "%03d,%03d,%03d\r\n", xx-pxx, yy-pyy, zz-pzz);
+    HAL_UART_Transmit(&huart1, (unsigned char*)aa, 20, 20);
 
-	  pxx = xx;
-	  pyy = yy;
-	  pzz = zz;
+    pxx = xx;
+    pyy = yy;
+    pzz = zz;
   }
 }
 
 void StartADXL(void)
 {
-	//reset
-	uint8_t data[2];
-	data [0] = 0X00;
-	data [1] = 0X01;
-	HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
-	//REG_POWERCTRL reset
-	data [0] = 0X2d;
-	data [1] = 0X00;
-	HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
-	//REG_POWERCTRL start at x variable
-	data [0] = 0X2d;
-	data [1] = 0X08;
-	HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
-	//+- 4G RANGE
-	data [0] = 0X31;
-	data [1] = 0X01;
-	HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
+  //reset
+  uint8_t data[2];
+  data [0] = 0X00;
+  data [1] = 0X01;
+  HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
+  //REG_POWERCTRL reset
+  data [0] = 0X2d;
+  data [1] = 0X00;
+  HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
+  //REG_POWERCTRL start at x variable
+  data [0] = 0X2d;
+  data [1] = 0X08;
+  HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
+  //+- 4G RANGE
+  data [0] = 0X31;
+  data [1] = 0X01;
+  HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
 }
 
 int PassBandFilter(int xx, int pxx)
 {
-	int dx = xx-pxx;// first order derivative of the signal
-	if(dx < 0) dx = dx*(int)-1; // absolute value of dx
-	if (dx > MaxdxPassBand || dx < MindxPassBand) xx = pxx;// Limits of the filter
-	return xx;
+  int dx = xx-pxx;// first order derivative of the signal
+  if(dx < 0) dx = dx*(int)-1; // absolute value of dx
+  if (dx > MaxdxPassBand || dx < MindxPassBand) xx = pxx;// Limits of the filter
+  return xx;
 }
 
 void ReadADXL (void)
 {
-	HAL_I2C_Mem_Read(&hi2c1, AXS_ADDR, 0X32, 1, buf, 6, 100);
-	x = (buf[1]>>8)| buf[0];
-	y = (buf[3]>>8)| buf[2];
-	z = (buf[5]>>8)| buf[4];
-	xx = x;
-	yy = y;
-	zz = z;
+  HAL_I2C_Mem_Read(&hi2c1, AXS_ADDR, 0X32, 1, buf, 6, 100);
+  x = (buf[1]>>8)| buf[0];
+  y = (buf[3]>>8)| buf[2];
+  z = (buf[5]>>8)| buf[4];
+  xx = x;
+  yy = y;
+  zz = z;
 }
 
 void Clock_Config(void)
