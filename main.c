@@ -34,7 +34,6 @@ static const uint8_t AXS_ADDR = 0x53 << 1; //predefined adress for ADXL345
 
 void StartADXL(void);
 void ReadADXL (void);
-int overlapse_filter (int x);
 int PassBandFilter(int xx, int pxx);
 
 char aa[26];
