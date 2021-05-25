@@ -11,7 +11,8 @@ Considering x as a variable of the sensor output, which will change over time th
 
 According to the final function, the simplest way of obtaining the value of the acceleration in each axis is just make a subtraction of the last value measured with the actual value measured. This system does not have any kind of filter that suppress the noise that could disturb the final output.
 
-Stationary state response of the sensor before filtering
+
+Stationary state response of the sensor before filtering.
 
 ![OFF](https://github.com/Miguelest07/STM32F1_ADXL345_DigitalFilter/blob/main/3.PNG)
 
