@@ -1,4 +1,4 @@
-# STM32F1_ADXL345_BandPass
+# STM32F1_ADXL345_DigitalFilter
 STM32F1 Project implementing a digital filter with an ADXL345 accelerometer over I2C.
 
 According to the acceleration function, the first derivative of the velocity. Which is given by the ADXL345 as a value x,y,z according to de differential in the transductor inside of the sensor which measures the acceleration of the three axes:
