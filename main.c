@@ -30,7 +30,7 @@ static void GPIO_Init(void);
 static void I2C_Init(void);
 static void UART_Init(void);
 
-static const uint8_t AXS_ADDR = 0x53 << 1; //predefined adress for ADXL345
+static const uint8_t AXS_ADDR = 0x53 << 1; //predefined address for ADXL345
 
 void StartADXL(void);
 void ReadADXL (void);
@@ -108,9 +108,9 @@ int DigitalFilter(int xx, int pxx)
 void ReadADXL (void)
 {
   HAL_I2C_Mem_Read(&hi2c1, AXS_ADDR, 0X32, 1, buf, 6, 100);
-  x = (buf[1]>>8)| buf[0];
-  y = (buf[3]>>8)| buf[2];
-  z = (buf[5]>>8)| buf[4];
+  x = (buf[1]>>8)| buf[0];//register 1 and 0 belongs to x axis
+  y = (buf[3]>>8)| buf[2];//register 3 and 2 belongs to y axis
+  z = (buf[5]>>8)| buf[4];//register 5 and 4 belongs to z axis
   xx = x;
   yy = y;
   zz = z;
