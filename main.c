@@ -19,8 +19,8 @@
 #include "main.h"
 #include <stdio.h>
 
-#define MindxPassBand 3 //minimum differential value for the filter
-#define MaxdxPassBand 100//Maximum differential value for the filter
+#define Mindx 3 //minimum differential value for the filter
+#define Maxdx 100//Maximum differential value for the filter
 
 I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart1;
@@ -34,7 +34,7 @@ static const uint8_t AXS_ADDR = 0x53 << 1; //predefined adress for ADXL345
 
 void StartADXL(void);
 void ReadADXL (void);
-int PassBandFilter(int xx, int pxx);
+int DigitalFilter(int xx, int pxx);
 
 char aa[26];
 uint8_t buf[6];
@@ -63,9 +63,9 @@ int main(void)
   while (1)
   {
     ReadADXL ();
-    xx = PassBandFilter(xx, pxx);
-    yy = PassBandFilter(yy, pyy);
-    zz = PassBandFilter(zz, pzz);
+    xx = DigitalFilter(xx, pxx);
+    yy = DigitalFilter(yy, pyy);
+    zz = DigitalFilter(zz, pzz);
 
     sprintf((char*)aa, "%03d,%03d,%03d\r\n", xx-pxx, yy-pyy, zz-pzz);
     HAL_UART_Transmit(&huart1, (unsigned char*)aa, 20, 20);
@@ -97,11 +97,11 @@ void StartADXL(void)
   HAL_I2C_Master_Transmit(&hi2c1, AXS_ADDR, data, 2, 10);
 }
 
-int PassBandFilter(int xx, int pxx)
+int DigitalFilter(int xx, int pxx)
 {
   int dx = xx-pxx;// first order derivative of the signal
   if(dx < 0) dx = dx*(int)-1; // absolute value of dx
-  if (dx > MaxdxPassBand || dx < MindxPassBand) xx = pxx;// Limits of the filter
+  if (dx > Maxdx || dx < Mindx) xx = pxx;// Limits of the filter
   return xx;
 }
 
