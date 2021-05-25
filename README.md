@@ -1,7 +1,7 @@
 # STM32F1_ADXL345_DigitalFilter
 STM32F1 Project implementing a digital filter with an ADXL345 accelerometer over I2C.
 
-According to the acceleration function, the first derivative of the velocity is the representation of acceleration due the change in velocity over the time. When using an accelerometer, those values are given according to the differential voltage in the transductor inside of the sensor which measures the acceleration of the three axes x, y, and z.
+According to the acceleration function, the first derivative of the velocity is the representation of acceleration due the change in velocity over the time. When using an accelerometer, those values are given according to the differential voltage in the transductor inside of the sensor which measures the velocity of the three axes x, y, and z.
 
 ![OFF](https://github.com/Miguelest07/STM32F1_ADXL345_DigitalFilter/blob/main/1.PNG)
 
