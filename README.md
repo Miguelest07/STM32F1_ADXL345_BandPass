@@ -43,4 +43,4 @@ The final function is given by applying the function of the filter in the first 
 
 ![OFF](https://github.com/Miguelest07/STM32F1_ADXL345_DigitalFilter/blob/main/8.PNG)
 
-The axes of the sensor are shown correctly due the application of the filter. The system now is reliable to continue with different implementations with the ADXL345.
+The axes of the sensor are shown correctly according to movement done due the application of the filter, the graphs shown that the axes that are not moving are showing its respective low values. The system now is reliable to continue the development of different implementations with the ADXL345.
