@@ -23,12 +23,16 @@ The digital filter can be implemented with a function which determines the unwan
 ![OFF](https://github.com/Miguelest07/STM32F1_ADXL345_DigitalFilter/blob/main/4.PNG)
 
 According to the graph the values represented as a noise are below of three, so the minimum value to supress is the number 3.
+
+
 Stationary state response of the sensor after filtering
 
 ![OFF](https://github.com/Miguelest07/STM32F1_ADXL345_DigitalFilter/blob/main/5.PNG)
 
 The previous graph show that the stationary state response of the signal signal is clear of noise due the digital filter applied.
 When debugging the different axis of the sensor, the noise became stronger, in such a way that it almost shown peaks above of 150. That behaviour is not desired because it is not detecting the proper axis but if we take a detailed look over the signal, we can observe that the movement is being registered but the noise disturbs the data. So once obtained the maximum values gotten as a noise the maximum value to suppress is 100.
+
+
 Once the values of the filter are gotten, the final function of the filter is:
 
 ![OFF](https://github.com/Miguelest07/STM32F1_ADXL345_DigitalFilter/blob/main/6.PNG)
